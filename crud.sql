@@ -46,10 +46,25 @@ WHERE c.nome = 'Georgia';
 
 -- 1)
 
+UPDATE
+	clientes
+	SET
+lealdade = (
+	SELECT SUM(prod.pts_de_lealdade) total
+  	FROM produtos AS prod
+  	JOIN produtos_pedidos prodped ON prod.id = prodped.produto_id
+  	JOIN pedidos ped ON prodped.pedido_id = ped.id
+  	JOIN clientes c ON ped.cliente_id = c.id
+  	WHERE c.nome = 'Georgia'
+)
 
+WHERE nome = 'Georgia';
 
 -- Deleção
 
 -- 1)
-
+DELETE FROM
+  clientes
+WHERE
+  nome LIKE 'Marcelo'
 
